@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from typing import Dict, List
 from typing import Optional
 import uuid
+from supabase import create_client, Client
+import os
 
 
 
