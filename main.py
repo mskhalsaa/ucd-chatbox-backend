@@ -6,9 +6,22 @@ import uuid
 from supabase import create_client, Client
 import os
 
+SUPABASE_URL = "https://csmatcjemdqrpsuefvwf.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzbWF0Y2plbWRxcnBzdWVmdndmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxODYyOTcsImV4cCI6MjA4NTc2MjI5N30.TBO2Lab1c65BOCR5G-jf9dDFKI4Xhq1PBgxSG6tuzNY"
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
 app = FastAPI()
+
+@app.get("/supabase-test")
+def supabase_test():
+    data = supabase.table("conversation").select("*").limit(1).execute()
+    return {
+        "connected": True,
+        "data": data.data
+    }
+
 
 
 class ChatRequest(BaseModel):
